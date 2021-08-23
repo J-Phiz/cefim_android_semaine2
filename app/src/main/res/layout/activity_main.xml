@@ -24,7 +24,7 @@
                 android:id="@+id/tv_city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/city_name"
+                android:text="--"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_city"
                 android:textColor="@color/white"
@@ -33,7 +33,7 @@
                 android:id="@+id/tv_city_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/city_desc"
+                android:text="--"
                 android:textSize="@dimen/text_desc"
                 android:textColor="@color/white"
                 />
@@ -49,7 +49,6 @@
                 android:id="@+id/iv_desc_icon"
                 android:layout_width="@dimen/image_desc_width"
                 android:layout_height="@dimen/image_desc_height"
-                android:src="@drawable/weather_sunny_white"
                 android:scaleType="centerInside"
                 />
             <TextView
@@ -58,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="textEnd"
-                android:text="@string/city_temp"
+                android:text="--°C"
                 android:textSize="@dimen/text_temp"
                 android:textColor="@color/white"
                 />
