@@ -2,6 +2,7 @@ package fr.jpsave.android.mymeteo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void defaultOnClickFavoriteButton(View view) {
         Toast.makeText(this, "J'ai cliqué chef...", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, FavoriteActivity.class);
+        startActivity(intent);
     }
 
 }

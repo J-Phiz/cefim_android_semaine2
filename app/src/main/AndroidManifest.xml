@@ -11,7 +11,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyMeteo">
+        android:theme="@style/Theme.MyMeteo"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.FavoriteActivity"
+            android:label="@string/title_activity_favorite"
+            android:theme="@style/Theme.MyMeteo.NoActionBar"/>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
