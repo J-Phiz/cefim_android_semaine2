@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import fr.jpsave.android.mymeteo.R;
+import fr.jpsave.android.mymeteo.constants.Constants;
 import fr.jpsave.android.mymeteo.tools.Tools;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTvError;
     private LinearLayout mLlTempInfos;
     private FloatingActionButton mFabFavorite;
+    private EditText mEtTextToTransfer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mTvError = findViewById(R.id.tv_error);
         mLlTempInfos = findViewById(R.id.ll_temp_infos);
         mFabFavorite = findViewById(R.id.favoriteButton);
+        mEtTextToTransfer = findViewById(R.id.et_text_to_transfer);
 
         if (!Tools.checkInternetConnection(this)) {
             mTvError.setText(R.string.no_internet);
@@ -56,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void defaultOnClickFavoriteButton(View view) {
-        Toast.makeText(this, "J'ai cliqué chef...", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, FavoriteActivity.class);
+        intent.putExtra(Constants.MSG_MAIN_ACT, mEtTextToTransfer.getText() != null ? mEtTextToTransfer.getText().toString() : "");
         startActivity(intent);
     }
 

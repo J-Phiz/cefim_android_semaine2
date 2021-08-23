@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="marge">16dp</dimen>
+    <dimen name="marge_small">8dp</dimen>
+    <dimen name="marge_large">32dp</dimen>
     <dimen name="marge_image">8dp</dimen>
     <dimen name="marge_title">32dp</dimen>
     <dimen name="marge_subtitle">16dp</dimen>

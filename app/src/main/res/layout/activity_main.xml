@@ -8,63 +8,84 @@
     <LinearLayout
         android:id="@+id/ll_temp_infos"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        android:orientation="vertical"
-        android:background="@color/background_orange"
-        >
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="@dimen/title_height"
             android:orientation="vertical"
-            android:layout_margin="@dimen/marge"
+            android:background="@color/background_orange"
             >
 
-            <TextView
-                android:id="@+id/tv_city_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="--"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_city"
-                android:textColor="@color/white"
-                />
-            <TextView
-                android:id="@+id/tv_city_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="--"
-                android:textSize="@dimen/text_desc"
-                android:textColor="@color/white"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/marge"
-            >
-            <ImageView
-                android:id="@+id/iv_desc_icon"
-                android:layout_width="@dimen/image_desc_width"
-                android:layout_height="@dimen/image_desc_height"
-                android:scaleType="centerInside"
-                />
-            <TextView
-                android:id="@+id/tv_city_temp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="textEnd"
-                android:text="--°C"
-                android:textSize="@dimen/text_temp"
-                android:textColor="@color/white"
-                />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/marge"
+                >
 
+                <TextView
+                    android:id="@+id/tv_city_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_city"
+                    android:textColor="@color/white"
+                    />
+                <TextView
+                    android:id="@+id/tv_city_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="@dimen/text_desc"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/marge"
+                >
+                <ImageView
+                    android:id="@+id/iv_desc_icon"
+                    android:layout_width="@dimen/image_desc_width"
+                    android:layout_height="@dimen/image_desc_height"
+                    android:scaleType="centerInside"
+                    />
+                <TextView
+                    android:id="@+id/tv_city_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAlignment="textEnd"
+                    android:text="--°C"
+                    android:textSize="@dimen/text_temp"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <EditText
+                android:id="@+id/et_text_to_transfer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/marge_large"
+                android:layout_marginRight="@dimen/marge_large"
+                android:gravity="center"
+                android:hint="Message"
+                />
         </LinearLayout>
     </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favoriteButton"
@@ -91,4 +112,5 @@
         android:visibility="gone"
         android:layout_centerInParent="true"
         />
+
 </RelativeLayout>
