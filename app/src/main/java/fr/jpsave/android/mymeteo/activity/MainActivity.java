@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             mTvCityTemp.setText(R.string.city_temp);
             mIvDescIcon.setImageResource(R.drawable.weather_sunny_white);
         }
+    }
+
+    public void defaultOnClickFavoriteButton(View view) {
+        Toast.makeText(this, "J'ai cliqué chef...", Toast.LENGTH_LONG).show();
     }
 
 }

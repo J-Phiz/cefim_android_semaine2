@@ -73,7 +73,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/marge"
-        android:onClick="defaultOnClickSearchButton"
+        android:onClick="defaultOnClickFavoriteButton"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
         app:backgroundTint="@color/background_orange"
         app:tint="@color/white"
