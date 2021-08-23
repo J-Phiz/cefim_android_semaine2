@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     >
     <LinearLayout
+        android:id="@+id/ll_temp_infos"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         android:orientation="vertical"
@@ -79,4 +80,15 @@
         app:borderWidth="0dp"
         />
 
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marge"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>
