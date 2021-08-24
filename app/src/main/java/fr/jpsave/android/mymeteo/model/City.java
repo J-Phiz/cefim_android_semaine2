@@ -5,6 +5,9 @@ public class City {
     private String mDescription;
     private String mTemperature;
     private int mWeatherIcon;
+    private double mLon;
+    private double mLat;
+    private int mIdCity;
 
     public City(String mName, String mDescription, String mTemperature, int mWeatherIcon) {
         this.mName = mName;
@@ -29,6 +32,30 @@ public class City {
         return mWeatherIcon;
     }
 
+    public double getmLon() {
+        return mLon;
+    }
+
+    public void setmLon(double mLon) {
+        this.mLon = mLon;
+    }
+
+    public double getmLat() {
+        return mLat;
+    }
+
+    public void setmLat(double mLat) {
+        this.mLat = mLat;
+    }
+
+    public int getmIdCity() {
+        return mIdCity;
+    }
+
+    public void setmIdCity(int mIdCity) {
+        this.mIdCity = mIdCity;
+    }
+
     @Override
     public String toString() {
         return "City{" +
@@ -36,6 +63,9 @@ public class City {
                 ", mDescription='" + mDescription + '\'' +
                 ", mTemperature='" + mTemperature + '\'' +
                 ", mWeatherIcon=" + mWeatherIcon +
+                ", mLon=" + mLon +
+                ", mLat=" + mLat +
+                ", mIdCity=" + mIdCity +
                 '}';
     }
 }

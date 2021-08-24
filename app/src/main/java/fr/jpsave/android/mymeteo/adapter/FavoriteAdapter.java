@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fr.jpsave.android.mymeteo.R;
+import fr.jpsave.android.mymeteo.constants.ConvertWeatherIcons;
 import fr.jpsave.android.mymeteo.model.City;
 import fr.jpsave.android.mymeteo.tools.Tools;
 
@@ -88,7 +89,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.tvCity.setText(city.getmName());
         holder.tvDesc.setText(city.getmDescription());
         holder.tvTemp.setText(city.getmTemperature());
-        holder.ivIcon.setImageResource(city.getmWeatherIcon());
+        holder.ivIcon.setImageResource(
+                ConvertWeatherIcons.getIcon(city.getmWeatherIcon(), ConvertWeatherIcons.IconColor.GREY)
+        );
         holder.city = city;
     }
 

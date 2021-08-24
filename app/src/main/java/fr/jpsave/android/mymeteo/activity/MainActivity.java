@@ -9,15 +9,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+
+import java.util.Locale;
 
 import fr.jpsave.android.mymeteo.R;
+import fr.jpsave.android.mymeteo.client.ClientAPI;
 import fr.jpsave.android.mymeteo.constants.Constants;
+import fr.jpsave.android.mymeteo.constants.ConvertWeatherIcons;
+import fr.jpsave.android.mymeteo.dto.CityDTO;
+import fr.jpsave.android.mymeteo.mapper.CityMapper;
+import fr.jpsave.android.mymeteo.model.City;
 import fr.jpsave.android.mymeteo.tools.Tools;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ClientAPI {
 
     private TextView mTvCityName;
     private TextView mTvCityDesc;
@@ -52,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
             mLlTempInfos.setVisibility(View.VISIBLE);
             mFabFavorite.setVisibility(View.VISIBLE);
 
-            mTvCityName.setText(R.string.city_name);
-            mTvCityDesc.setText(R.string.city_desc);
-            mTvCityTemp.setText(R.string.city_temp);
-            mIvDescIcon.setImageResource(R.drawable.weather_sunny_white);
+            callAPI(
+                    this,
+                    Constants.WEATHER_API_URL_WITH_COMMON_OPTS + "&q=" + "Tours,fr"
+            );
         }
     }
 
@@ -65,4 +72,41 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    private void renderCurrentWeather(City city) {
+        mTvCityName.setText(city.getmName());
+        mTvCityDesc.setText(city.getmDescription());
+        mTvCityTemp.setText(city.getmTemperature());
+        mIvDescIcon.setImageResource(
+                ConvertWeatherIcons.getIcon(city.getmWeatherIcon(), ConvertWeatherIcons.IconColor.WHITE)
+        );
+    }
+
+    private void failure(int msgId) {
+        mTvError.setText(msgId);
+        mTvError.setVisibility(View.VISIBLE);
+        mLlTempInfos.setVisibility(View.INVISIBLE);
+        mFabFavorite.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onAPIFailure() {
+        failure(R.string.no_result_db_access);
+    }
+
+    @Override
+    public void onAPISuccess(String json) {
+        Gson gson = new Gson();
+        CityDTO cityDto = gson.fromJson(json, CityDTO.class);
+        if (cityDto != null && cityDto.cod == 200) {
+            renderCurrentWeather(CityMapper.fromDto(cityDto));
+        } else {
+            failure(R.string.no_result_db_access);
+        }
+    }
+
+    @Override
+    public void onAPINoInternetAccess() {
+        failure(R.string.no_internet);
+    }
 }

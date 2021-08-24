@@ -11,5 +11,6 @@
     <string name="add_favorite_dialog_text">Ajouter une ville</string>
     <string name="add_favorite_button_cancel">Annuler</string>
     <string name="add_favorite_button_ok">OK</string>
-    <string name="suppress_favorite_message">Voulez-vous supprimer la ville</string>
+    <string name="suppress_favorite_message">Voulez-vous supprimer</string>
+    <string name="no_result_db_access">Aucune information disponible</string>
 </resources>

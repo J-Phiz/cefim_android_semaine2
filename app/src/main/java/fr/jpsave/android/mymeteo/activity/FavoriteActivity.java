@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,6 +19,8 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +28,14 @@ import java.util.ArrayList;
 
 import fr.jpsave.android.mymeteo.R;
 import fr.jpsave.android.mymeteo.adapter.FavoriteAdapter;
+import fr.jpsave.android.mymeteo.client.ClientAPI;
 import fr.jpsave.android.mymeteo.constants.Constants;
+import fr.jpsave.android.mymeteo.dto.CityDTO;
+import fr.jpsave.android.mymeteo.mapper.CityMapper;
 import fr.jpsave.android.mymeteo.model.City;
 import fr.jpsave.android.mymeteo.tools.Tools;
 
-public class FavoriteActivity extends AppCompatActivity {
+public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
 
     private Activity mContext;
     private ArrayList<City> mCities;
@@ -61,13 +67,11 @@ public class FavoriteActivity extends AppCompatActivity {
                 builder.setNegativeButton(R.string.add_favorite_button_cancel, null);
                 builder.setPositiveButton(R.string.add_favorite_button_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        City city = new City(
-                                Tools.formatCityName(newCityName.getText().toString()),
-                                "Ensoleillé",
-                                "32°C",
-                                R.drawable.weather_sunny_grey);
-                        mCities.add(city);
-                        mFavoriteAdapter.notifyDataSetChanged();
+                        callAPI(
+                                mContext,
+                                Constants.WEATHER_API_URL_WITH_COMMON_OPTS +
+                                        "&q=" + newCityName.getText().toString()
+                        );
                     }
                 });
 
@@ -82,16 +86,31 @@ public class FavoriteActivity extends AppCompatActivity {
         mRvFavorite.setLayoutManager(new LinearLayoutManager(this));
         mFavoriteAdapter = new FavoriteAdapter(this, mCities);
         mRvFavorite.setAdapter(mFavoriteAdapter);
+    }
 
-        City city1 = new City("Montréal", "Légères pluies", "22°C", R.drawable.weather_rainy_grey);
-        City city2 = new City("New York", "Ensoleillé", "22°C", R.drawable.weather_sunny_grey);
-        City city3 = new City("Paris", "Nuageux", "24°C", R.drawable.weather_foggy_grey);
-        City city4 = new City("Toulouse", "Pluies modérées", "20°C", R.drawable.weather_rainy_grey);
-        mCities.add(city1);
-        mCities.add(city2);
-        mCities.add(city3);
-        mCities.add(city4);
+    private void failure(int msgId) {
+        Toast.makeText(mContext, msgId, Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void onAPIFailure() {
+        failure(R.string.no_result_db_access);
+    }
 
+    @Override
+    public void onAPISuccess(String json) {
+        Gson gson = new Gson();
+        CityDTO cityDto = gson.fromJson(json, CityDTO.class);
+        if (cityDto != null && cityDto.cod == 200) {
+            mCities.add(CityMapper.fromDto(cityDto));
+            mFavoriteAdapter.notifyDataSetChanged();
+        } else {
+            failure(R.string.no_result_db_access);
+        }
+    }
+
+    @Override
+    public void onAPINoInternetAccess() {
+        failure(R.string.no_internet);
     }
 }
