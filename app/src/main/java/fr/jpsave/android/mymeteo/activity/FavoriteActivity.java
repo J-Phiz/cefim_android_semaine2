@@ -48,8 +48,13 @@ public class FavoriteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mContext, R.style.Theme_MyMeteo_AlertDialog));
+                //final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setPositiveButton(R.string.add_favorite_button_ok, null);
+                builder.setNegativeButton(R.string.add_favorite_button_cancel, null);
+                View v = LayoutInflater.from(mContext).inflate(R.layout.dialog_add_favorite, null);
+                builder.setView(v);
+                builder.create().show();
             }
         });
 

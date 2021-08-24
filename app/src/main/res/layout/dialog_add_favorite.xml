@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/marge">
+    <EditText
+        android:id="@+id/edit_text_add_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/marge_large"
+        android:layout_marginLeft="@dimen/marge_large"
+        android:layout_marginRight="@dimen/marge_large"
+        android:hint="@string/add_favorite_dialog_text"
+        app:backgroundTint="@color/background_orange"
+        />
+</LinearLayout>
