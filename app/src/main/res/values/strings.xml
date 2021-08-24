@@ -10,4 +10,5 @@
     <string name="add_favorite_dialog_text">Add a city</string>
     <string name="add_favorite_button_ok">OK</string>
     <string name="add_favorite_button_cancel">Cancel</string>
+    <string name="suppress_favorite_message">Do you want to suppress city</string>
 </resources>
