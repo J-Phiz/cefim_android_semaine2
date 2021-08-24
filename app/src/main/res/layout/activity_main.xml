@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_city"
+                    android:textSize="@dimen/title_text_city"
                     android:textColor="@color/white"
                     />
                 <TextView
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="@dimen/text_desc"
+                    android:textSize="@dimen/title_text_desc"
                     android:textColor="@color/white"
                     />
 
@@ -52,8 +52,8 @@
                 >
                 <ImageView
                     android:id="@+id/iv_desc_icon"
-                    android:layout_width="@dimen/image_desc_width"
-                    android:layout_height="@dimen/image_desc_height"
+                    android:layout_width="@dimen/title_image_desc_width"
+                    android:layout_height="@dimen/title_image_desc_height"
                     android:scaleType="centerInside"
                     />
                 <TextView
@@ -63,7 +63,7 @@
                     android:layout_gravity="center"
                     android:textAlignment="textEnd"
                     android:text="--°C"
-                    android:textSize="@dimen/text_temp"
+                    android:textSize="@dimen/title_text_temp"
                     android:textColor="@color/white"
                     />
 

@@ -18,10 +18,17 @@
     <dimen name="text_margin">6dp</dimen>
 
     <dimen name="title_height">220dp</dimen>
-    <dimen name="text_temp">55sp</dimen>
-    <dimen name="text_desc">14sp</dimen>
-    <dimen name="text_city">32sp</dimen>
-    <dimen name="image_desc_width">80dp</dimen>
-    <dimen name="image_desc_height">80dp</dimen>
+    <dimen name="title_text_temp">55sp</dimen>
+    <dimen name="title_text_desc">14sp</dimen>
+    <dimen name="title_text_city">32sp</dimen>
+    <dimen name="title_image_desc_width">80dp</dimen>
+    <dimen name="title_image_desc_height">80dp</dimen>
+
+    <dimen name="favorite_item_height">88dp</dimen>
+    <dimen name="favorite_item_text_temp">29sp</dimen>
+    <dimen name="favorite_item_text_desc">11sp</dimen>
+    <dimen name="favorite_item_text_city">25sp</dimen>
+    <dimen name="favorite_item_image_desc_width">60dp</dimen>
+    <dimen name="favorite_item_image_desc_height">60dp</dimen>
 
 </resources>
