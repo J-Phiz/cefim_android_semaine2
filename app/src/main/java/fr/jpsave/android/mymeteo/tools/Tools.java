@@ -21,4 +21,8 @@ public class Tools {
         }
     }
 
+    public static String formatCityName(String cityName) {
+        return cityName.substring(0,1).toUpperCase() + cityName.substring(1).toLowerCase();
+    }
+
 }

@@ -2,6 +2,7 @@ package fr.jpsave.android.mymeteo.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import fr.jpsave.android.mymeteo.R;
 import fr.jpsave.android.mymeteo.adapter.FavoriteAdapter;
 import fr.jpsave.android.mymeteo.constants.Constants;
 import fr.jpsave.android.mymeteo.model.City;
+import fr.jpsave.android.mymeteo.tools.Tools;
 
 public class FavoriteActivity extends AppCompatActivity {
 
@@ -48,12 +51,26 @@ public class FavoriteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mContext, R.style.Theme_MyMeteo_AlertDialog));
-                //final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setPositiveButton(R.string.add_favorite_button_ok, null);
-                builder.setNegativeButton(R.string.add_favorite_button_cancel, null);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(
+                        new ContextThemeWrapper(mContext, R.style.Theme_MyMeteo_AlertDialog)
+                );
                 View v = LayoutInflater.from(mContext).inflate(R.layout.dialog_add_favorite, null);
+                final EditText newCityName = v.findViewById(R.id.edit_text_add_favorite);
                 builder.setView(v);
+
+                builder.setNegativeButton(R.string.add_favorite_button_cancel, null);
+                builder.setPositiveButton(R.string.add_favorite_button_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        City city = new City(
+                                Tools.formatCityName(newCityName.getText().toString()),
+                                "Ensoleillé",
+                                "32°C",
+                                R.drawable.weather_sunny_grey);
+                        mCities.add(city);
+                        mFavoriteAdapter.notifyDataSetChanged();
+                    }
+                });
+
                 builder.create().show();
             }
         });
