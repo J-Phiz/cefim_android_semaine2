@@ -13,4 +13,5 @@
     <string name="add_favorite_button_ok">OK</string>
     <string name="suppress_favorite_message">Voulez-vous supprimer</string>
     <string name="no_result_db_access">Aucune information disponible</string>
+    <string name="is_suppress">a été supprimé</string>
 </resources>

@@ -32,7 +32,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         mCities = cities;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCity;
         public TextView tvDesc;
         public TextView tvTemp;
@@ -45,30 +45,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             tvDesc = view.findViewById(R.id.favorite_item_desc);
             tvTemp = view.findViewById(R.id.favorite_item_temp);
             ivIcon = view.findViewById(R.id.favorite_item_icon);
-            view.setOnLongClickListener(this);
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(
-                    new ContextThemeWrapper(mContext, R.style.Theme_MyMeteo_AlertDialog)
-            );
-            builder.setMessage(mContext.getString(R.string.suppress_favorite_message) + " " + city.getmName());
-            builder.setNegativeButton(R.string.add_favorite_button_cancel, null);
-            builder.setPositiveButton(R.string.add_favorite_button_ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    for (City c : mCities) {
-                        if (city.getmName().equals(c.getmName())) {
-                            mCities.remove(c);
-                            break;
-                        }
-                    }
-                    notifyDataSetChanged();
-                }
-            });
-            builder.create().show();
-
-            return false;
         }
     }
 

@@ -13,4 +13,5 @@
     <string name="suppress_favorite_message">Do you want to suppress</string>
     <string name="no_result_db_access">No weather information available</string>
     <string name="weather_base_url">http://api.openweathermap.org/data/2.5/weather</string>
+    <string name="is_suppress">is removed</string>
 </resources>

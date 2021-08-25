@@ -15,7 +15,7 @@ public class CityMapper {
     public static City fromDto(CityDTO dto) {
         return fromDto(
                 new City(
-                        dto.name,
+                        dto.name.replace("Arrondissement de ", ""),
                         dto.weather[0].description,
                         String.format("%2.1f°C", dto.main.temp),
                         Integer.parseInt(dto.weather[0].icon.substring(0,2))

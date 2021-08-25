@@ -10,8 +10,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +44,8 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
     private ArrayList<City> mCities;
     private RecyclerView mRvFavorite;
     private FavoriteAdapter mFavoriteAdapter;
+    private City mCityToRemove;
+    private int mCityToRemovePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,35 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
         mRvFavorite.setLayoutManager(new LinearLayoutManager(this));
         mFavoriteAdapter = new FavoriteAdapter(this, mCities);
         mRvFavorite.setAdapter(mFavoriteAdapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT)
+        {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                mCityToRemovePosition = ((FavoriteAdapter.ViewHolder) viewHolder).getBindingAdapterPosition();
+                mCityToRemove = mCities.get(mCityToRemovePosition);
+                mCities.remove(mCityToRemovePosition);
+                mFavoriteAdapter.notifyDataSetChanged();
+                Snackbar.make(
+                        findViewById(R.id.coordinator_layout_favorite),
+                        mCityToRemove.getmName() + " " + getString(R.string.is_suppress),
+                        Snackbar.LENGTH_LONG
+                ).setAction(
+                        R.string.add_favorite_button_cancel, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mCities.add(mCityToRemovePosition, mCityToRemove);
+                                mFavoriteAdapter.notifyDataSetChanged();
+                            }
+                        }
+                ).show();
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(mRvFavorite);
     }
 
     private void failure(int msgId) {
