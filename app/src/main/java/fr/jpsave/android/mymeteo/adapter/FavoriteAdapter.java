@@ -25,13 +25,11 @@ import fr.jpsave.android.mymeteo.tools.Tools;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private Context mContext;
-    private final FavoriteAdapter mAdapter;
     private ArrayList<City> mCities;
 
     public FavoriteAdapter(Context context, ArrayList<City> cities) {
         mContext = context;
         mCities = cities;
-        mAdapter = this;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
@@ -52,8 +50,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
         @Override
         public boolean onLongClick(View view) {
-            Toast.makeText(mContext, "Suppression de la ville "+city.getmName(), Toast.LENGTH_SHORT).show();
-
             final AlertDialog.Builder builder = new AlertDialog.Builder(
                     new ContextThemeWrapper(mContext, R.style.Theme_MyMeteo_AlertDialog)
             );
@@ -67,7 +63,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                             break;
                         }
                     }
-                    mAdapter.notifyDataSetChanged();
+                    notifyDataSetChanged();
                 }
             });
             builder.create().show();
