@@ -58,6 +58,15 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
         toolBarLayout.setTitle(getTitle());
 
+        mContext = this;
+        Bundle extras = getIntent().getExtras();
+        mCities = Tools.initFavoriteCities(mContext);
+        mRvFavorite = findViewById(R.id.favorite_recycler_view);
+        mRvFavorite.setLayoutManager(new LinearLayoutManager(this));
+        mFavoriteAdapter = new FavoriteAdapter(this, mCities);
+        mRvFavorite.setAdapter(mFavoriteAdapter);
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,14 +93,6 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
             }
         });
 
-        Bundle extras = getIntent().getExtras();
-        mContext = this;
-        mCities = new ArrayList<>();
-        mRvFavorite = findViewById(R.id.favorite_recycler_view);
-        mRvFavorite.setLayoutManager(new LinearLayoutManager(this));
-        mFavoriteAdapter = new FavoriteAdapter(this, mCities);
-        mRvFavorite.setAdapter(mFavoriteAdapter);
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT)
         {
             @Override
@@ -104,6 +105,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                 mCityToRemove = mCities.get(mCityToRemovePosition);
                 mCities.remove(mCityToRemovePosition);
                 mFavoriteAdapter.notifyDataSetChanged();
+                Tools.saveFavoriteCities(mContext, mCities);
                 Snackbar.make(
                         findViewById(R.id.coordinator_layout_favorite),
                         mCityToRemove.getmName() + " " + getString(R.string.is_suppress),
@@ -114,6 +116,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                             public void onClick(View view) {
                                 mCities.add(mCityToRemovePosition, mCityToRemove);
                                 mFavoriteAdapter.notifyDataSetChanged();
+                                Tools.saveFavoriteCities(mContext, mCities);
                             }
                         }
                 ).show();
@@ -138,6 +141,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
         if (cityDto != null && cityDto.cod == 200) {
             mCities.add(CityMapper.fromDto(cityDto));
             mFavoriteAdapter.notifyDataSetChanged();
+            Tools.saveFavoriteCities(mContext, mCities);
         } else {
             failure(R.string.no_result_db_access);
         }

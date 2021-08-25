@@ -9,4 +9,6 @@ public class Constants {
             "?APPID=" + APIKeys.WEATHER_API_KEY +
             "&units=metric" +
             "&lang=" + Locale.getDefault().getLanguage();
+    public static final String PREFS_NAME = "myMeteoPrefs";
+    public static final String PREFS_FAVORITE_CITIES = "myMeteoPrefsFavoriteCities";
 }
