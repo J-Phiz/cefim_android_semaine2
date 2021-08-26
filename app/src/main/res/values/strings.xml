@@ -15,4 +15,5 @@
     <string name="weather_base_url">http://api.openweathermap.org/data/2.5/weather</string>
     <string name="is_suppress">is removed</string>
     <string name="no_position">Localisation unavailable</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
