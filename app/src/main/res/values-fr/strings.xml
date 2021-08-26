@@ -14,4 +14,5 @@
     <string name="suppress_favorite_message">Voulez-vous supprimer</string>
     <string name="no_result_db_access">Aucune information disponible</string>
     <string name="is_suppress">a été supprimé</string>
+    <string name="no_position">Localisation impossible</string>
 </resources>
