@@ -12,4 +12,5 @@ public class Constants {
             "&lang=" + Locale.getDefault().getLanguage();
     public static final String PREFS_NAME = "myMeteoPrefs";
     public static final String PREFS_FAVORITE_CITIES = "myMeteoPrefsFavoriteCities";
+    public static final String PREFS_WIDGETS_CITY = "myMeteoPrefsWidgetsCity";
 }

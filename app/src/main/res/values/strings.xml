@@ -16,4 +16,6 @@
     <string name="is_suppress">is removed</string>
     <string name="no_position">Localisation unavailable</string>
     <string name="title_activity_maps">Map</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

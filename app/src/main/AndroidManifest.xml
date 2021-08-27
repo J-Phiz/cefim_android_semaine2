@@ -35,6 +35,17 @@
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+
+        <receiver android:name=".CurrentCityWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/current_city_widget_info" />
+        </receiver>
+
         <activity
             android:name=".activity.FavoriteActivity"
             android:label="@string/title_activity_favorite"

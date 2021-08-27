@@ -26,4 +26,10 @@
     <style name="Theme.MyMeteo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MyMeteo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ThemeOverlay.MyMeteo.AppWidgetContainer" parent="">
+        <item name="appWidgetBackgroundColor">@color/transparent_black</item>
+        <item name="appWidgetBackgroundColor">@color/transparent_black</item>
+        <item name="appWidgetTextColor">@color/white</item>
+    </style>
 </resources>
