@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements ClientAPI {
                 Log.i("MyMeteoLoc", "Location {lat=" + location.getLatitude() + " ; lon=" + location.getLongitude() + "}");
 
                 callAPI(
+                        MainActivity.this,
                         mContext,
                         Constants.WEATHER_API_URL_WITH_COMMON_OPTS + "&lat=" + location.getLatitude() +
                                 "&lon=" + location.getLongitude()

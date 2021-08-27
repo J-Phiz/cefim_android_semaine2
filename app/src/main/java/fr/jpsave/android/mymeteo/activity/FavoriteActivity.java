@@ -82,6 +82,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                 builder.setPositiveButton(R.string.add_favorite_button_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         callAPI(
+                                FavoriteActivity.this,
                                 mContext,
                                 Constants.WEATHER_API_URL_WITH_COMMON_OPTS +
                                         "&q=" + newCityName.getText().toString()

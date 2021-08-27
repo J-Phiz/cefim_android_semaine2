@@ -1,6 +1,8 @@
 package fr.jpsave.android.mymeteo.client;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,8 +21,10 @@ import okhttp3.Response;
 
 public interface ClientAPI {
 
-    default void callAPI(Activity context, String url) {
+    default void callAPI(ClientAPI clientAPI, Context context, String url) {
         OkHttpClient okHttpClient = new OkHttpClient();
+
+        Handler handler = new Handler();
 
         if (!Tools.checkInternetConnection(context)) {
             onAPINoInternetAccess();
@@ -50,7 +54,7 @@ public interface ClientAPI {
 //                    e.printStackTrace();
 //                }
 
-                context.runOnUiThread(new Runnable() {
+                handler.post( new Runnable() {
                     @Override
                     public void run() {
                         // Code exécuté dans le Thread principale
