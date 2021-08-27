@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import fr.jpsave.android.mymeteo.constants.Constants;
 import fr.jpsave.android.mymeteo.model.City;
+import fr.jpsave.android.mymeteo.model.CityWidget;
 
 public class Tools {
 
@@ -37,36 +38,37 @@ public class Tools {
         return cityName.substring(0,1).toUpperCase() + cityName.substring(1).toLowerCase();
     }
 
-    public static void saveFavoriteCities(Context context, ArrayList<City> cities) {
-        JSONArray jsonArrayCities = new JSONArray();
-        for (int i = 0; i < cities.size(); i++) {
+
+    public static <T> void savePreferences(String prefName, Context context, ArrayList<T> prefs) {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < prefs.size(); i++) {
             Gson gson = new Gson();
-            jsonArrayCities.put(gson.toJson(cities.get(i)));
+            jsonArray.put(gson.toJson(prefs.get(i)));
         }
         SharedPreferences preferences = context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        Log.i("MyMeteoDebug", "saveFavoriteCities: " + jsonArrayCities.toString());
-        editor.putString(Constants.PREFS_FAVORITE_CITIES, jsonArrayCities.toString());
+        Log.i("MyMeteoDebug", "savePreferences: " + jsonArray.toString());
+        editor.putString(prefName, jsonArray.toString());
         editor.apply();
     }
 
-    public static ArrayList<City> initFavoriteCities(Context context) {
-        ArrayList<City> cities = new ArrayList<>();
+    public static <T> ArrayList<T> loadPreferences(String prefName, Context context, Class<T> deserialiseClass) {
+        ArrayList<T> prefs = new ArrayList<>();
 
         SharedPreferences preferences = context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
 
         try {
-            JSONArray jsonArrayCities = new JSONArray(preferences.getString(Constants.PREFS_FAVORITE_CITIES, ""));
-            Log.i("MyMeteoDebug", "initFavoriteCities: " + jsonArrayCities.toString());
-            for (int i = 0; i < jsonArrayCities.length(); i++) {
+            JSONArray jsonArray = new JSONArray(preferences.getString(prefName, ""));
+            Log.i("MyMeteoDebug", "loadPreferences: " + jsonArray.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
                 Gson gson = new Gson();
-                City city = (gson.fromJson(jsonArrayCities.getString(i), City.class));
-                cities.add(city);
+                T pref = (gson.fromJson(jsonArray.getString(i), deserialiseClass));
+                prefs.add(pref);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return cities;
+        return prefs;
     }
 }

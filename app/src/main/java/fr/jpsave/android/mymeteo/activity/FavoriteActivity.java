@@ -60,7 +60,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
 
         mContext = this;
         Bundle extras = getIntent().getExtras();
-        mCities = Tools.initFavoriteCities(mContext);
+        mCities = Tools.loadPreferences(Constants.PREFS_FAVORITE_CITIES, mContext, City.class);
         mRvFavorite = findViewById(R.id.favorite_recycler_view);
         mRvFavorite.setLayoutManager(new LinearLayoutManager(this));
         mFavoriteAdapter = new FavoriteAdapter(this, mCities);
@@ -106,7 +106,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                 mCityToRemove = mCities.get(mCityToRemovePosition);
                 mCities.remove(mCityToRemovePosition);
                 mFavoriteAdapter.notifyDataSetChanged();
-                Tools.saveFavoriteCities(mContext, mCities);
+                Tools.savePreferences(Constants.PREFS_FAVORITE_CITIES, mContext, mCities);
                 Snackbar.make(
                         findViewById(R.id.coordinator_layout_favorite),
                         mCityToRemove.getmName() + " " + getString(R.string.is_suppress),
@@ -117,7 +117,7 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                             public void onClick(View view) {
                                 mCities.add(mCityToRemovePosition, mCityToRemove);
                                 mFavoriteAdapter.notifyDataSetChanged();
-                                Tools.saveFavoriteCities(mContext, mCities);
+                                Tools.savePreferences(Constants.PREFS_FAVORITE_CITIES, mContext, mCities);
                             }
                         }
                 ).show();
