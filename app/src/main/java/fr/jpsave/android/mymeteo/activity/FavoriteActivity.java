@@ -85,7 +85,8 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
                                 FavoriteActivity.this,
                                 mContext,
                                 Constants.WEATHER_API_URL_WITH_COMMON_OPTS +
-                                        "&q=" + newCityName.getText().toString()
+                                        "&q=" + newCityName.getText().toString(),
+                                null
                         );
                     }
                 });
@@ -136,13 +137,13 @@ public class FavoriteActivity extends AppCompatActivity implements ClientAPI {
     }
 
     @Override
-    public void onAPISuccess(String json) {
+    public void onAPISuccess(String json, Integer id) {
         Gson gson = new Gson();
         CityDTO cityDto = gson.fromJson(json, CityDTO.class);
         if (cityDto != null && cityDto.cod == 200) {
             mCities.add(CityMapper.fromDto(cityDto));
             mFavoriteAdapter.notifyDataSetChanged();
-            Tools.saveFavoriteCities(mContext, mCities);
+            Tools.savePreferences(Constants.PREFS_FAVORITE_CITIES, mContext, mCities);
         } else {
             failure(R.string.no_result_db_access);
         }

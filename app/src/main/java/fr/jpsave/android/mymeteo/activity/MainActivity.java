@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements ClientAPI {
                         MainActivity.this,
                         mContext,
                         Constants.WEATHER_API_URL_WITH_COMMON_OPTS + "&lat=" + location.getLatitude() +
-                                "&lon=" + location.getLongitude()
+                                "&lon=" + location.getLongitude(),
+                        null
                 );
 
                 mLocationManager.removeUpdates(mLocationListener);
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements ClientAPI {
     }
 
     @Override
-    public void onAPISuccess(String json) {
+    public void onAPISuccess(String json, Integer id) {
         Gson gson = new Gson();
         CityDTO cityDto = gson.fromJson(json, CityDTO.class);
         if (cityDto != null && cityDto.cod == 200) {

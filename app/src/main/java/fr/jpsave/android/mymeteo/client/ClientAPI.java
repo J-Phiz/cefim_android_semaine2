@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ import okhttp3.Response;
 
 public interface ClientAPI {
 
-    default void callAPI(ClientAPI clientAPI, Context context, String url) {
+    default void callAPI(ClientAPI clientAPI, Context context, String url, Integer id) {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Handler handler = new Handler();
@@ -58,7 +60,7 @@ public interface ClientAPI {
                     @Override
                     public void run() {
                         // Code exécuté dans le Thread principale
-                        onAPISuccess(stringJson);
+                        onAPISuccess(stringJson, id);
                     }
                 });
             }
@@ -67,7 +69,7 @@ public interface ClientAPI {
 
     void onAPIFailure();
 
-    void onAPISuccess(String json);
+    void onAPISuccess(String json, Integer id);
 
     void onAPINoInternetAccess();
 
